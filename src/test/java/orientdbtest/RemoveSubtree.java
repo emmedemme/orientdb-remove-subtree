@@ -83,7 +83,7 @@ public class RemoveSubtree {
 	
 	private Vertex attachChild(final Vertex parent) {
 		final Vertex child = addVertex(CHILD_VERTEX_TYPE);
-		child.addEdge(EDGE_LABEL, parent);
+		graph.addEdge(null, child, parent, EDGE_LABEL);
 		return child;
 	}
 	
