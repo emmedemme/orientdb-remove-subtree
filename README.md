@@ -1,4 +1,4 @@
-OrientDBTests
+OrientDB remove subtree
 =============
 
 These tests were written to debug an application based on OrientDB.
