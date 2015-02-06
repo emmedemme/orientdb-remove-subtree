@@ -1,0 +1,3 @@
+This directory is used for all unit tests as a temporary working directory.
+Each of the tests cleans out all its temp files when its done. Hence, after 
+running the tests this folder is always empty.
