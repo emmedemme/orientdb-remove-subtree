@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.orientechnologies.orient.core.metadata.schema.OClass;
+import com.orientechnologies.orient.core.metadata.schema.OType;
 import com.tinkerpop.blueprints.Direction;
 import com.tinkerpop.blueprints.Edge;
 import com.tinkerpop.blueprints.Vertex;
@@ -33,9 +35,9 @@ public class RemoveSubtree {
 	
 	private void setSchema() {
 		final OrientGraphNoTx graphNoTx = graphFactory.getNoTx();
-		graphNoTx.createVertexType(ROOT_VERTEX_TYPE);
-		graphNoTx.createVertexType(CHILD_VERTEX_TYPE);
-		graphNoTx.createEdgeType(EDGE_LABEL);
+		OClass rootVertexType = graphNoTx.createVertexType(ROOT_VERTEX_TYPE);
+		OClass childVertexType = graphNoTx.createVertexType(CHILD_VERTEX_TYPE);
+		childVertexType.createProperty(EDGE_LABEL, OType.LINK, rootVertexType);
 	}
 
 	@After
@@ -69,7 +71,7 @@ public class RemoveSubtree {
 		for (Vertex directChild: root.getVertices(Direction.IN, EDGE_LABEL)) {
 			removeSubtree(directChild);
 		}
-		root.remove();
+		graph.removeVertex(root);
 	}
 	
 	private Vertex buildTree() {
